@@ -39,7 +39,6 @@ def getTransactions(start, end):
             # h = transaction["hash"]
             # c = str(address)
             print(f"{x} {a} {b}",file = f)
-            print(f"MATCH! IN BLOCK {x}!!!")
             # if transaction['to'] == address or transaction['from'] == address:
             #     with open("transactions.pkl", "wb") as f:
             #         hashStr = transaction['hash'].hex()
