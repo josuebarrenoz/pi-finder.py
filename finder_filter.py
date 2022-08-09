@@ -20,8 +20,7 @@ w3 = Web3(HTTPProvider('http://3.128.144.155:23001'))
 #tx_dictionary = {}
 
 
-#def getTransactions(start, end, address):
-def getTransactions(start, end):
+def getTransactions(start, end, address):
     '''This function takes three inputs, a starting block number, ending block number
     and an Ethereum address. The function loops over the transactions in each block and
     checks if the address in the to field matches the one we set in the blockchain_address.
@@ -29,7 +28,7 @@ def getTransactions(start, end):
     a Python object.'''
 
     print(f"Started filtering through block number {start} to {end}")
-    for x in range(start, end):
+    for x in range(start, end+1):
         print(f"Checking block number {x}")
         block = w3.eth.getBlock(x, True)
         for transaction in block.transactions:
@@ -41,9 +40,7 @@ def getTransactions(start, end):
             #c = str(address)
             if a.lower() == address or b.lower() == address:
                 print(f"{x} {a} {b}",file = f)
-                print("MATCH!")
-            
-
+                print(f"MATCH! IN BLOCK {x}!!!")
             # if transaction['to'] == address or transaction['from'] == address:
             #     with open("transactions.pkl", "wb") as f:
             #         hashStr = transaction['hash'].hex()
@@ -57,11 +54,13 @@ def getTransactions(start, end):
 	# getTransactions(starting_blocknumber, ending_blocknumber, blockchain_address)
 	# f.close()
 
+
 if __name__ == "__main__":
-    print(f"Inicializing finder.py ......")
+    print(f"Inicializing finder_filter.py ......")
     starting_blocknumber = int(input("Find transactions from block number: "))
     ending_blocknumber = int(input("Until block number: "))
+    blockchain_address = str(input("Put a blockchain address to find: "))
     f = open ("output_filter.txt","a")
     # getTransactions(starting_blocknumber, ending_blocknumber, blockchain_address)
-    getTransactions(starting_blocknumber, ending_blocknumber)
+    getTransactions(starting_blocknumber, ending_blocknumber, blockchain_address)
     f.close()
