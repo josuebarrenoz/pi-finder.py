@@ -31,6 +31,7 @@ def getTransactions(start, end):
     print(f"The last block generated is {w3.eth.blockNumber}")
     print(f"Wait until generated the file output.txt...")
     for x in range(start, end):
+        print(f"Checking block number {x}")
         block = w3.eth.getBlock(x, True)
         for transaction in block.transactions:
             a = transaction["from"]
@@ -38,6 +39,7 @@ def getTransactions(start, end):
             # h = transaction["hash"]
             # c = str(address)
             print(f"{x} {a} {b}",file = f)
+            print(f"MATCH! IN BLOCK {x}!!!")
             # if transaction['to'] == address or transaction['from'] == address:
             #     with open("transactions.pkl", "wb") as f:
             #         hashStr = transaction['hash'].hex()
