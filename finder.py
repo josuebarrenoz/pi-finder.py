@@ -20,7 +20,7 @@ starting_blocknumber = 12840923
 #create an empty dictionary we will add transaction data to
 #tx_dictionary = {}
 
-def getTransactions(start, end, address):
+def getTransactions(start, end):
     '''This function takes three inputs, a starting block number, ending block number
     and an Ethereum address. The function loops over the transactions in each block and
     checks if the address in the to field matches the one we set in the blockchain_address.
@@ -47,5 +47,6 @@ def getTransactions(start, end, address):
     #print(f"Finished searching blocks {start} through {end} and found {len(tx_dictionary)} transactions")
 
 f = open ("output.txt","a")
-getTransactions(starting_blocknumber, ending_blocknumber, blockchain_address)
+# getTransactions(starting_blocknumber, ending_blocknumber, blockchain_address)
+getTransactions(starting_blocknumber, ending_blocknumber)
 f.close()
