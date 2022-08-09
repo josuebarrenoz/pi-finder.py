@@ -11,15 +11,15 @@ ending_blocknumber1 = w3.eth.blockNumber
 ending_blocknumber = 12900673
 
 #latest block number minus 100 blocks
-starting_blocknumber = 12620050
+starting_blocknumber = 12646797
 
 #filter through blocks and look for transactions involving this address
-#blockchain_address = "0x5d9d830d89e260e733f073c4d80ff58caf3ac6bb"
+blockchain_address = "0x5d9d830d89e260e733f073c4d80ff58caf3ac6bb"
 
 #create an empty dictionary we will add transaction data to
 #tx_dictionary = {}
 
-def getTransactions(start, end):
+def getTransactions(start, end, address):
     '''This function takes three inputs, a starting block number, ending block number
     and an Ethereum address. The function loops over the transactions in each block and
     checks if the address in the to field matches the one we set in the blockchain_address.
@@ -32,12 +32,15 @@ def getTransactions(start, end):
         block = w3.eth.getBlock(x, True)
         for transaction in block.transactions:
             a = str(transaction["from"])
+            al = a.lower()
             b = str(transaction["to"])
+            bl = b.lower()
             #h = transaction["hash"]
             #c = str(address)
-
+            if al == address or bl == address:
+                print(f"{x} {a} {b}",file = f)
+                print("MATCH!")
             
-            print(f"{x} {a} {b}",file = f)
 
             # if transaction['to'] == address or transaction['from'] == address:
             #     with open("transactions.pkl", "wb") as f:
@@ -45,8 +48,8 @@ def getTransactions(start, end):
             #         tx_dictionary[hashStr] = transaction
             #         pickle.dump(tx_dictionary, f)
             #     f.close()
-    #print(f"Finished searching blocks {start} through {end} and found {len(tx_dictionary)} transactions")
+    print(f"Finished searching blocks {start} through {end}")
 
 f = open ("output.txt","a")
-getTransactions(starting_blocknumber, ending_blocknumber)
+getTransactions(starting_blocknumber, ending_blocknumber, blockchain_address)
 f.close()
