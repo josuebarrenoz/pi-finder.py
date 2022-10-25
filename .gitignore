@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # outputs
-output.txt
+*.txt
